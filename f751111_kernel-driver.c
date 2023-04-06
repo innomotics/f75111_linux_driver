@@ -49,18 +49,18 @@ static unsigned long flags;
 static DEFINE_SPINLOCK(reg_lock);
 
 void smbus_clear() {
-
+    return;
 }
 
 int smbus_wait() {
-
+    return 0;
 }
 
 bool smbus_busy() {
-    reutrn false;
+    return false;
 }
 
-void smbus_write(byte cmd, byte value) {
+void smbus_write(BYTE cmd, BYTE value) {
     smbus_clear();
     if (!smbus_busy()) {
         i2c_smbus_write_byte_data(i2c_cli, cmd, value);
@@ -68,7 +68,7 @@ void smbus_write(byte cmd, byte value) {
     }
 }
 
-BYTE smbus_read(byte cmd) {
+BYTE smbus_read(BYTE cmd) {
     smbus_clear();
     if (!smbus_busy()) {
         return i2c_smbus_read_byte_data(i2c_cli, cmd);
@@ -81,14 +81,15 @@ bool is_chip(WORD deviceID, BYTE chipReg2, BYTE chipReg1)
     return (smbus_read(chipReg2) << 8 | smbus_read(chipReg1)) == deviceID;
 }
 
-bool initialize_f75111() {
-    // Initialize SMBus
+void initialize_f75111() {
     BYTE tmp;
+    BYTE byteGPIO1X;
+
+    // Initialize SMBus
     tmp = i2c_smbus_read_byte_data(i2c_cli, SMBAUXCTL);
     i2c_smbus_write_byte_data(i2c_cli, SMBAUXCTL, tmp & ~(SMBAUXCTL_CRC | SMBAUXCTL_E32B));
 
     // Initialize F75111
-    BYTE byteGPIO1X;
     if (is_chip(F75111_DEVICE_ID, F75111_CHIP_ID_REGISTER_2, F75111_CHIP_ID_REGISTER_1)) {
         byteGPIO1X = smbus_read(GPIO1X_OUTPUT_DATA);
         smbus_write(GPIO1X_CONTROL_MODE, (byteGPIO1X & 0x0f) | 0xf0);
@@ -126,9 +127,9 @@ void set_output_pin(u8 pin_number, bool pin_status)
         byteData = (byteIn1 & 0x08 )? byteData + 0x80 : byteData;
 
         if(pin_status)
-            set_digital_output(byteData | a);
+            byteData |= a;
         else
-            set_digital_output(byteData & ~a);
+            byteData &= ~a;
         smbus_write(GPIO2X_OUTPUT_DATA, byteData);
     }
     else if ((pin_number >= 8 ) && (pin_number <= 15))
@@ -148,9 +149,9 @@ void set_output_pin(u8 pin_number, bool pin_status)
         byteData = (byteIn1 & 0x20 )? byteData + 0x80 : byteData;
 
         if(pin_status)
-            set_digital_output(byteData | a);
+            byteData |= a;
         else
-            set_digital_output(byteData & ~a);
+            byteData &= ~a;
         smbus_write(GPIO1X_OUTPUT_DATA, byteData);
         smbus_write(GPIO3X_OUTPUT_DATA, byteData);
     }
@@ -162,11 +163,10 @@ static inline struct innomotics_ipc_led *cdev_to_led(struct led_classdev *led_cd
 }
 
 static void set_led(u16 ledNum, enum led_color col, bool on) {
-    printk("Setting LED #%d %s to %d\n", ledNum, colors[col], on);
-
 	innomotics_ipc_led *ipcled ;
     ipcled = innomotics_ipc_leds_f75111;
 
+    printk("Setting LED #%d %s to %d\n", ledNum, colors[col], on);
 	while (ipcled->num) {
         if (ipcled->num == ledNum && ipcled->color == col) {
             printk("Setting pin %d\n", ipcled->pin);
@@ -189,10 +189,6 @@ static void innomotics_ipc_led_set_io(struct led_classdev *led_cd, enum led_brig
 {
 	struct innomotics_ipc_led *led = cdev_to_led(led_cd);
     set_led(led->num, led->color, brightness);
-}
-
-static void pr_i2c_adap(struct i2c_adap *adapter) {
-    pr_info("%pTN<struct i2c_adapter>", adapter);
 }
 
 static int f75111n_ipc_leds_probe(struct platform_device *pdev)
@@ -305,6 +301,6 @@ static void __exit wrap_led_exit(void)
 module_init(wrap_led_init);
 module_exit(wrap_led_exit);
 
-MODULE_LICENSE("GPL v2");
+MODULE_LICENSE("Apache 2.0");
 MODULE_ALIAS("platform:" KBUILD_MODNAME);
 MODULE_AUTHOR("Mathias Haimerl <mathias.haimerl@siemens.com>");
