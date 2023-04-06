@@ -91,45 +91,6 @@ if (SMBus_Busy() == false)
 }
 return 0x0;
 ```
-
-### `SMBus_CheckChip`
-Compare the chip hardware ID WORD with an arbitrary one (`deviceID`)
-```C
-WORD tempID = 0x0;
-WORD checkID = 0x0;
-SMBus_ReadByte(byteSlave, CHIP_ID_REGISTER2, &tempID);
-checkID = tempID << 8;
-SMBus_ReadByte(byteSlave, CHIP_ID_REGISTER1, &tempID);
-checkID |= tempID;
-return (checkID == deviceID);
-```
-
-### `SMBus_Clear`
-Clears any processes from the SMBus
-```C
-BYTE IoState = 0x00;
-do {
-    SMBusIoWrite(SMBHSTSTS, 0xFF);
-    usleep(1);
-    IoState = SMBusIoRead(SMBHSTSTS);
-    usleep(1);
-} while((IoState & 0x01) != 0);
-SMBusIoWrite(SMBHSTDAT0, 0x00);
-```
-IMO, the clear command should only be sent once and waiting should be done up to a max (e.g. 10 times):
-```C
-SMBusIoWrite(SMBHSTSTS, 0xFF);
-udelay(1);
-BYTE IoState;
-uint8 limit = 10;
-do {
-    udelay(1);
-    IoState = SMBusIoRead(SMBHSTSTS);
-} while(IoState & 0x01 || (--limit > 0));
-if (IoState & 0x01)
-    SMBusIoWrite(SMBHSTDAT0, 0x00);
-```
-
 ### `SMBus_Busy`
 Checks if SMBus is not available
 ```C
@@ -171,6 +132,45 @@ while(--limit)
 }
 return SMBUS_BUSY;
 ```
+
+### `SMBus_CheckChip`
+Compare the chip hardware ID WORD with an arbitrary one (`deviceID`)
+```C
+WORD tempID = 0x0;
+WORD checkID = 0x0;
+SMBus_ReadByte(byteSlave, CHIP_ID_REGISTER2, &tempID);
+checkID = tempID << 8;
+SMBus_ReadByte(byteSlave, CHIP_ID_REGISTER1, &tempID);
+checkID |= tempID;
+return (checkID == deviceID);
+```
+
+### `SMBus_Clear`
+Clears any processes from the SMBus
+```C
+BYTE IoState = 0x00;
+do {
+    SMBusIoWrite(SMBHSTSTS, 0xFF);
+    usleep(1);
+    IoState = SMBusIoRead(SMBHSTSTS);
+    usleep(1);
+} while((IoState & 0x01) != 0);
+SMBusIoWrite(SMBHSTDAT0, 0x00);
+```
+IMO, the clear command should only be sent once and waiting should be done up to a max (e.g. 10 times):
+```C
+SMBusIoWrite(SMBHSTSTS, 0xFF);
+udelay(1);
+BYTE IoState;
+uint8 limit = 10;
+do {
+    udelay(1);
+    IoState = SMBusIoRead(SMBHSTSTS);
+} while(IoState & 0x01 || (--limit > 0));
+if (IoState & 0x01)
+    SMBusIoWrite(SMBHSTDAT0, 0x00);
+```
+
 
 ## Lessons learned
 * Delaying should not be done with the scheduler [according to Linus](https://github.com/torvalds/linux/blob/a351e9b9fc24e982ec2f0e76379a49826036da12/Documentation/timers/timers-howto.txt)

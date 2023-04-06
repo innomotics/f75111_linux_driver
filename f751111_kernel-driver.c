@@ -48,28 +48,73 @@ static unsigned long flags;
 
 static DEFINE_SPINLOCK(reg_lock);
 
-void set_digital_output(u8 data) {
-    pr_info("Sending SMBus: %x", data);
-    //spin_lock_irqsave(&reg_lock, flags);
-    i2c_smbus_write_byte(i2c_cli, data);
-    //spin_unlock_irqrestore(&reg_lock, flags);
+void smbus_clear() {
+
 }
 
-bool set_output_pin(u8 pin_number, bool pin_status)
+int smbus_wait() {
+
+}
+
+bool smbus_busy() {
+    reutrn false;
+}
+
+void smbus_write(byte cmd, byte value) {
+    smbus_clear();
+    if (!smbus_busy()) {
+        i2c_smbus_write_byte_data(i2c_cli, cmd, value);
+        smbus_wait();
+    }
+}
+
+BYTE smbus_read(byte cmd) {
+    smbus_clear();
+    if (!smbus_busy()) {
+        return i2c_smbus_read_byte_data(i2c_cli, cmd);
+    }
+    return 0x0;
+}
+
+bool is_chip(WORD deviceID, BYTE chipReg2, BYTE chipReg1)
 {
-    u8 a = 0x1;
+    return (smbus_read(chipReg2) << 8 | smbus_read(chipReg1)) == deviceID;
+}
+
+bool initialize_f75111() {
+    // Initialize SMBus
+    BYTE tmp;
+    tmp = i2c_smbus_read_byte_data(i2c_cli, SMBAUXCTL);
+    i2c_smbus_write_byte_data(i2c_cli, SMBAUXCTL, tmp & ~(SMBAUXCTL_CRC | SMBAUXCTL_E32B));
+
+    // Initialize F75111
+    BYTE byteGPIO1X;
+    if (is_chip(F75111_DEVICE_ID, F75111_CHIP_ID_REGISTER_2, F75111_CHIP_ID_REGISTER_1)) {
+        byteGPIO1X = smbus_read(GPIO1X_OUTPUT_DATA);
+        smbus_write(GPIO1X_CONTROL_MODE, (byteGPIO1X & 0x0f) | 0xf0);
+        smbus_write(GPIO1X_OUTPUT_DRIVING, (byteGPIO1X & 0x0f) | 0xf0);
+        smbus_write(GPIO2X_CONTROL_MODE, 0xFF);
+        smbus_write(GPIO2X_OUTPUT_DRIVING, 0xFF);
+        smbus_write(GPIO3X_CONTROL_MODE, 0x0F);
+        smbus_write(GPIO3X_OUTPUT_DRIVING, 0x0F);
+        smbus_write(F75111_CONFIGURATION,0x03);
+        smbus_write(0x06, 0x04);
+    }
+}
+
+void set_output_pin(u8 pin_number, bool pin_status)
+{
+    u8 a;
     u8 byteData = 0;
     s32 byteIn1 = 0;
     s32 byteIn2 = 0;
 
-    //spin_lock_irqsave(&reg_lock, flags);
-    byteIn1 = i2c_smbus_read_byte(i2c_cli);
-    //spin_unlock_irqrestore(&reg_lock, flags);
-
+    byteIn1 = smbus_read(GPIO2X_INPUT_DATA);
     printk("Read data from SMBus: %x", byteIn1);
 
     if((pin_number >= 0 ) && (pin_number <= 7))
     {
+        a = 0x1 << (pin_number-1);
         byteData = (byteIn1 & 0x01 )? byteData + 0x01 : byteData;
         byteData = (byteIn1 & 0x02 )? byteData + 0x02 : byteData;
         byteData = (byteIn1 & 0x04 )? byteData + 0x04 : byteData;
@@ -79,12 +124,17 @@ bool set_output_pin(u8 pin_number, bool pin_status)
         byteData = (byteIn1 & 0x20 )? byteData + 0x20 : byteData;
         byteData = (byteIn1 & 0x10 )? byteData + 0x40 : byteData;
         byteData = (byteIn1 & 0x08 )? byteData + 0x80 : byteData;
+
+        if(pin_status)
+            set_digital_output(byteData | a);
+        else
+            set_digital_output(byteData & ~a);
+        smbus_write(GPIO2X_OUTPUT_DATA, byteData);
     }
     else if ((pin_number >= 8 ) && (pin_number <= 15))
     {
-        //spin_lock_irqsave(&reg_lock, flags);
-        byteIn2 = i2c_smbus_read_byte(i2c_cli);
-        //spin_unlock_irqrestore(&reg_lock, flags);
+        a = 0x1 << ((pin_number-1)%8);
+        byteIn2 = smbus_read(GPIO2X_INPUT_DATA);
         printk("Read additional data from SMBus: %x", byteIn2);
 
         byteData = (byteIn1 & 0x10 )? byteData + 0x01 : byteData;
@@ -96,13 +146,14 @@ bool set_output_pin(u8 pin_number, bool pin_status)
         byteData = (byteIn2 & 0x04 )? byteData + 0x20 : byteData;
         byteData = (byteIn2 & 0x08 )? byteData + 0x40 : byteData;
         byteData = (byteIn1 & 0x20 )? byteData + 0x80 : byteData;
+
+        if(pin_status)
+            set_digital_output(byteData | a);
+        else
+            set_digital_output(byteData & ~a);
+        smbus_write(GPIO1X_OUTPUT_DATA, byteData);
+        smbus_write(GPIO3X_OUTPUT_DATA, byteData);
     }
-    a = a<< ((pin_number-1)%8);
-    if(pin_status)
-        set_digital_output(byteData | a);
-    else
-        set_digital_output(byteData & ~a);
-    return true;
 }
 
 static inline struct innomotics_ipc_led *cdev_to_led(struct led_classdev *led_cd)
