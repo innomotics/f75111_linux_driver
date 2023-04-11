@@ -171,6 +171,36 @@ if (IoState & 0x01)
     SMBusIoWrite(SMBHSTDAT0, 0x00);
 ```
 
+## F75111 Initialising
+As the initialization of the chip is really a blackbox, I disassembled it down to the SMBUS calls.
+We have the following bases:
+- SMBus base address is `3040`; we are calling it `base`
+- We have the following predefined offsets:
+  - `SMBHSTCNT`	= 0x02	// SMBus Control register
+  - `SMBHSTCMD` = 0x03	// SMBus Command register
+  - `SMBHSTADD` = 0x04	// SMBus Address register
+  - `SMBHSTDAT0` = 0x05 // SMBus Data 0 register
+  - `SMBHSTDAT1` = 0x06 // SMBus Data 1 register
+
+The call tree looks like follows:
+* `F75111_Init()`
+  * `SMBus_CheckChip(base, F75111_DEVICE_ID=0x0003, F75111_CHIP_ID_REGISTER_2=0x5B, F75111_CHIP_ID_REGISTER_1=0x5A)`
+    * `SMBus_ReadByte(base, CHIP_ID_REGISTER2=0x5B, &result)`
+      * `SMBus_Clear()`
+        * `SMBusIoWrite(base, 0xFF)`
+        * `SMBusIoRead(base)`
+        * `SMBusIoWrite(base + SMBHSTDAT0, 0xFF)`
+      * `SMBus_Busy()`
+        * `SMBusIoRead(base)` (Return if `0x01` bit is set)
+      * `SMBusIoWrite(base + SMBHSTADD, F75111_INTERNAL_ADDR=0x9C | 0x01)`
+      * `SMBusIoWrite(base + SMBHSTCMD, CHIP_ID_REGISTER2=0x5B)`
+      * `SMBusIoWrite(base + SMBHSTCNT, SMBHSTCNT_BYTE=0x08 | SMBHSTCNT_START=0x40)` (=0x48)
+      * Check if `SMBus_Wait()` == SMBUS_OK=0x0
+        * `SMBusIoRead(base)`
+        * if result has `SMBHSTSTS_INTR=0x02` bit set, return SMBUS_OK=0x0
+        * elif result has one of (SMBHSTSTS_FAILED=0x10 | SMBHSTSTS_COLLISION=0x08 | SMBHSTSTS_ERROR=0x04), return result
+        * else repeat
+      * Read query result from result register: `SMBusIoRead(base + SMBHSTDAT0)`
 
 ## Lessons learned
 * Delaying should not be done with the scheduler [according to Linus](https://github.com/torvalds/linux/blob/a351e9b9fc24e982ec2f0e76379a49826036da12/Documentation/timers/timers-howto.txt)

@@ -13,6 +13,7 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+#include <linux/delay.h>
 #include <linux/dmi.h>
 #include <linux/i2c.h>
 #include <linux/io.h>
@@ -48,22 +49,50 @@ static unsigned long flags;
 
 static DEFINE_SPINLOCK(reg_lock);
 
+BYTE i2c_read(BYTE cmd) {
+    BYTE result;
+    //cmd += F75111_INTERNAL_ADDR;
+    result = i2c_smbus_read_byte_data(i2c_cli, cmd);
+    printk("[SMBus Info] Reading = %x from address %x\n", result, cmd);
+    return result;
+}
+void i2c_write(BYTE cmd, BYTE data) {
+    //cmd += F75111_INTERNAL_ADDR;
+    printk("[SMBus Info] Writing = %x to address %x\n", data, cmd);
+    i2c_smbus_write_byte_data(i2c_cli, cmd, data);
+}
+
 void smbus_clear() {
-    return;
+    i2c_write(0x0,  0xFF);
+    udelay(1);
+    while (i2c_read(0x0) & 0x01) udelay(1);
+    i2c_write(SMBHSTDAT0,  0xFF);
 }
 
 int smbus_wait() {
-    return 0;
+    int	timeout = SMBUS_TIMEOUT;
+    BYTE value;
+
+    while(timeout--) {
+        // I/O Delay
+        udelay(1);
+        // Read Host Status Register
+        value = i2c_read(0x0);
+        if(value & SMBHSTSTS_INTR) return SMBUS_OK;
+        if(value &= (SMBHSTSTS_FAILED | SMBHSTSTS_COLLISION | SMBHSTSTS_ERROR)) return value;
+    }
+    return SMBUS_BUSY;
 }
 
 bool smbus_busy() {
-    return false;
+    return i2c_read(0x0) & SMBHSTSTS_BUSY;
 }
 
 void smbus_write(BYTE cmd, BYTE value) {
+    printk("Send byte '%x' to SMBus function %x\n", value, cmd);
     smbus_clear();
     if (!smbus_busy()) {
-        i2c_smbus_write_byte_data(i2c_cli, cmd, value);
+        i2c_write(cmd, value);
         smbus_wait();
     }
 }
@@ -71,7 +100,12 @@ void smbus_write(BYTE cmd, BYTE value) {
 BYTE smbus_read(BYTE cmd) {
     smbus_clear();
     if (!smbus_busy()) {
-        return i2c_smbus_read_byte_data(i2c_cli, cmd);
+        i2c_write(SMBHSTADD, F75111_INTERNAL_ADDR | 0x01);
+        i2c_write(SMBHSTCMD, cmd);
+        i2c_write(SMBHSTCNT, SMBHSTCNT_BYTE | SMBHSTCNT_START);
+    }
+    if (smbus_wait() == SMBUS_OK) {
+        return i2c_read(SMBHSTDAT0);
     }
     return 0x0;
 }
@@ -82,13 +116,15 @@ bool is_chip(WORD deviceID, BYTE chipReg2, BYTE chipReg1)
 }
 
 void initialize_f75111() {
-    BYTE tmp;
+    char tmp;
     BYTE byteGPIO1X;
 
     // Initialize SMBus
-    tmp = i2c_smbus_read_byte_data(i2c_cli, SMBAUXCTL);
-    i2c_smbus_write_byte_data(i2c_cli, SMBAUXCTL, tmp & ~(SMBAUXCTL_CRC | SMBAUXCTL_E32B));
+    //tmp = i2c_read(SMBAUXCTL);
+    //printk("Read SMBAUXCTL from SMBus: %x", tmp);
+    //i2c_write(SMBAUXCTL, tmp & ~(SMBAUXCTL_CRC | SMBAUXCTL_E32B));
 
+    printk("is_chip result: %x", is_chip(F75111_DEVICE_ID, F75111_CHIP_ID_REGISTER_2, F75111_CHIP_ID_REGISTER_1));
     // Initialize F75111
     if (is_chip(F75111_DEVICE_ID, F75111_CHIP_ID_REGISTER_2, F75111_CHIP_ID_REGISTER_1)) {
         byteGPIO1X = smbus_read(GPIO1X_OUTPUT_DATA);
@@ -169,7 +205,6 @@ static void set_led(u16 ledNum, enum led_color col, bool on) {
     printk("Setting LED #%d %s to %d\n", ledNum, colors[col], on);
 	while (ipcled->num) {
         if (ipcled->num == ledNum && ipcled->color == col) {
-            printk("Setting pin %d\n", ipcled->pin);
             set_output_pin(ipcled->pin, on);
             break;
         }
@@ -203,16 +238,11 @@ static int f75111n_ipc_leds_probe(struct platform_device *pdev)
     int i;
     for (i = 0; i < 12; i++) {
         i2c_adap = i2c_get_adapter(i);
-        if (strstr(i2c_adap->name, "SMBus")) {
-            printk("Using I2C Adapter #%d: %x: %s\n", i2c_adap->nr, (int) i2c_adap, i2c_adap->name);
-            break;
-        }
+        if (strstr(i2c_adap->name, "SMBus")) break;
     }
 
     i2c_cli = i2c_new_client_device(i2c_adap, &i2c_info);
-    pr_info("%pTN<struct i2c_client>", i2c_cli);
-
-    printk("Innomotics kernel module started; I2C Address: %x\n", i2c_cli);
+    printk("Innomotics kernel module started; I2C Client %s, Address: %x\n", i2c_cli->name, i2c_cli->addr);
 
 	while (ipcled->num) {
 		cdev = &ipcled->cdev;
@@ -228,47 +258,11 @@ static int f75111n_ipc_leds_probe(struct platform_device *pdev)
 		}
 		ipcled++;
 	}
+    printk("Registering F75111 chip...\n");
+    initialize_f75111();
     printk("Loaded Innomotics LED kernel module\n");
 	return 0;
 }
-/*
-
-static int f75111n_ipc_leds_probe(struct platform_device *pdev)
-{
-    struct i2c_adapter *i2c_adap;
-    struct i2c_board_info i2c_info;
-    struct i2c_client *f75111_i2c_client;
-
-    i2c_adap = i2c_get_adapter(0);
-    memset(&i2c_info, 0, sizeof(struct i2c_board_info));
-    strscpy(i2c_info.type, "f75111", sizeof(i2c_info.type));
-    f75111_i2c_client = i2c_new_scanned_device(i2c_adap, &i2c_info, normal_i2c, NULL);
-
-    int err;
-	struct device *dev = &pdev->dev;
-	struct led_classdev *cdev;
-	struct innomotics_ipc_led *ipcled = innomotics_ipc_leds_f75111;
-
-    printk("Innomotics kernel module started\n");
-
-	while (ipcled->num) {
-		cdev = &ipcled->cdev;
-        cdev->brightness_set = innomotics_ipc_led_set_io;
-        cdev->brightness_get = innomotics_ipc_led_get_io;
-		cdev->max_brightness = LED_ON;
-		cdev->name = ipcled->name;
-
-		err = devm_led_classdev_register(dev, cdev);
-		if (err < 0) {
-			cleanup_module();
-			return err;
-		}
-		ipcled++;
-	}
-    printk("Loaded Innomotics LED kernel module\n");
-	return 0;
-}
- */
 
 static struct platform_driver innomotics_ipc_led_driver = {
 	.probe = f75111n_ipc_leds_probe,
@@ -295,12 +289,13 @@ static int __init wrap_led_init(void)
 
 static void __exit wrap_led_exit(void)
 {
+    i2c_unregister_device(i2c_cli);
     platform_driver_unregister(&innomotics_ipc_led_driver);
 }
 
 module_init(wrap_led_init);
 module_exit(wrap_led_exit);
 
-MODULE_LICENSE("Apache 2.0");
+MODULE_LICENSE("GPL v2");
 MODULE_ALIAS("platform:" KBUILD_MODNAME);
 MODULE_AUTHOR("Mathias Haimerl <mathias.haimerl@siemens.com>");

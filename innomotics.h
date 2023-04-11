@@ -9,8 +9,8 @@
 #define INVALID_STATION_ID	0
 #define OEM_TYPE_ID_PS		0x06
 //--------------------------------------------------------------------------------------------------------
-#define F75111_INTERNAL_ADDR			0x9C 	//	OnBoard  F75111 Chipset
-#define F75111_EXTERNAL_ADDR			0x6E	//	External F75111 Chipset
+#define F75111_INTERNAL_ADDR	0x9C 	//	OnBoard  F75111 Chipset
+#define F75111_EXTERNAL_ADDR	0x6E	//	External F75111 Chipset
 
 //----------------------------------------------------------------------------------
 //	F75111 Chip Vendor id / Chip ID
@@ -123,8 +123,11 @@ typedef unsigned long DWORD;
 
 
 const struct i2c_board_info i2c_info = {
-        I2C_BOARD_INFO("f75111", F75111_EXTERNAL_ADDR),
+    // The internal address in Linux I2C is not 8 Bit, but 7 bit.
+    // Thus, the 8-Bit Address must be shifted left by 1 bit
+    I2C_BOARD_INFO("f75111", F75111_INTERNAL_ADDR >> 1),
 };
+
 const unsigned short normal_i2c[] = { F75111_INTERNAL_ADDR, F75111_EXTERNAL_ADDR, I2C_CLIENT_END };
 
 const struct dmi_system_id innomotics_ipc_whitelist[] = {
