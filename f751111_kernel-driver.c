@@ -222,6 +222,7 @@ static void __exit wrap_led_exit(void)
 module_init(wrap_led_init);
 module_exit(wrap_led_exit);
 
+MODULE_SOFTDEP("pre: i2c_i801");
 MODULE_LICENSE("GPL v2");
 MODULE_ALIAS("platform:" KBUILD_MODNAME);
 MODULE_AUTHOR("Mathias Haimerl <mathias.haimerl@siemens.com>");
