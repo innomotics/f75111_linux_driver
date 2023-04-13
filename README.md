@@ -75,14 +75,14 @@ The _LED 1_ is available via 2X GPIOs, _LED 2_ via 1X GPIOs:
 
 Also, the color coding bits differ from LED to LED
 
-| LED   | Color                 | Address |
-|-------|-----------------------|---------|
-| LED 1 | Red                   | 0x01    |
-| LED 1 | Orange                | 0x02    |
-| LED 1 | Green                 | 0x04    |
-| LED 2 | Red                   | 0x10    |
-| LED 2 | Orange                | 0x80    |
-| LED 2 | Green                 | 0x40    |
+| LED   | Color                 | Bit  |
+|-------|-----------------------|------|
+| LED 1 | Red                   | 0x01 |
+| LED 1 | Orange                | 0x02 |
+| LED 1 | Green                 | 0x04 |
+| LED 2 | Red                   | 0x10 |
+| LED 2 | Orange                | 0x80 |
+| LED 2 | Green                 | 0x40 |
 
 The `GPIOYX_CONTROL_MODE` and `GPIOYX_OUTPUT_DRIVING` registers must be set to `0xFF` to enable output driving.
 This is implemented in the `initialize_f75111` function. 
