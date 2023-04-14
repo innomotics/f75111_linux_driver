@@ -1,0 +1,38 @@
+variables:
+  https_proxy: ${CODE_PROXY}
+  http_proxy: ${CODE_PROXY}
+  no_proxy: api.siemens.com,cr.siemens.com,code.siemens.com,devops.bt.siemens.com
+  BUILD_CONTAINER: ${CI_REGISTRY_IMAGE}/kmod-builder:latest
+
+stages:
+  - prepare
+  - build
+
+prepare build container:
+  stage: prepare
+  when: manual
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile.build"
+      --destination ${BUILD_CONTAINER}
+      --build-arg http_proxy=${CODE_PROXY}
+      --build-arg https_proxy=${CODE_PROXY}
+
+build in container:
+  stage: build
+  image: ${BUILD_CONTAINER}
+  script:
+    - source /root/.bashrc
+    - mkdir temp
+    - echo -e "${MOK_PEM_PRIVATE}" > temp/.priv && echo -e "${MOK_PEM_CERT}" > temp/.x509
+    - make sign; rm -rf temp # In any case: delete the keys
+    - echo "Created signed and compressed kernel module:"
+    - modinfo *.ko.zst
+  artifacts:
+    paths:
+      - "*.ko.zst"

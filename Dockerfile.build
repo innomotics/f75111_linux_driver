@@ -1,0 +1,7 @@
+FROM registry.suse.com/suse/sle-micro-rancher/5.4:latest
+ENV KERNEL_VERSION=5.14.21
+RUN zypper ar http://download.opensuse.org/distribution/leap/15.4/repo/oss/ oss && \
+    zypper --gpg-auto-import-keys in -y -f kernel-devel-${KERNEL_VERSION} && \
+    zypper in -y --allow-downgrade -t pattern devel_basis && \
+    zypper in -y --allow-downgrade mokutil zstd && \
+    echo "export KDIR=$(find /lib/modules/ -name build)" >> /root/.bashrc
