@@ -28,7 +28,7 @@ build in container:
   image: ${BUILD_CONTAINER}
   script:
     - source /root/.bashrc
-    - mkdir temp
+    - mkdir -p temp
     - echo -e "${MOK_PEM_PRIVATE}" > temp/.priv && echo -e "${MOK_PEM_CERT}" > temp/.x509
     - make sign; rm -rf temp # In any case: delete the keys
     - echo "Created signed and compressed kernel module:"
