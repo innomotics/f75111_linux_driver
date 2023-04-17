@@ -47,23 +47,10 @@
 //--------------------------------------------------------------------------------------------------------
 #define I2C_MAX_SCAN_ADAPTERS       16
 
-typedef unsigned char BYTE;
-typedef unsigned short WORD;
-typedef unsigned long DWORD;
-
-
 const struct i2c_board_info i2c_info = {
     // The internal address in Linux I2C is not 8 Bit, but 7 bit.
     // Thus, the 8-Bit Address must be shifted left by 1 bit
     I2C_BOARD_INFO("f75111", F75111_INTERNAL_ADDR >> 1),
-};
-
-struct innomotics_ipc_platform {
-    u8	            devmode;			/* device mode */
-    u16		        sio_addr;			/* sio io port address */
-    void	        *nvram_dev;			/* nvram pci device address */
-    u32		        nvram_did;			/* nvram pci device id */
-    struct resource *gpio_base;			/* gpio base address for 2x7d and 4x7d */
 };
 
 enum led_color {

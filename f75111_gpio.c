@@ -97,7 +97,7 @@ void set_led(innomotics_ipc_led *led, bool pin_status)
     u8 byteData;
     if (!led) return;
     byteData = smbus_read(led->pin + 1); // Read register is write register + 1
-    if(pin_status)
+    if (pin_status)
         byteData |= led->value;
     else
         byteData &= ~led->value;
@@ -151,10 +151,12 @@ static int f75111n_ipc_leds_probe(struct platform_device *pdev)
     // Scan for I2C master adapters
     for (i = 0; i < I2C_MAX_SCAN_ADAPTERS; i++) {
         i2c_adap = i2c_get_adapter(i);
-        if (!i2c_adap) return -ENODEV;
+        if (!i2c_adap)
+            return -ENODEV;
         if (strstr(i2c_adap->name, SMBUS_ADAPTER_NEEDLE)) break;
     }
-    if (!i2c_adap) return -ENODEV;
+    if (!i2c_adap)
+        return -ENODEV;
 
     // Create the client device
     i2c_cli = i2c_new_client_device(i2c_adap, &i2c_info);
