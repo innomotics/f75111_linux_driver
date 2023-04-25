@@ -1,5 +1,7 @@
 # Innomotics Linux LED Driver
 
+[![License](https://img.shields.io/badge/License-GPLv2-green.svg)](https://opensource.org/license/gpl-2-0/)
+
 The _SIDRIVEIQ NextGenNano_ (hereinafter NGN) platform developed by [Lex System](https://www.lex.com.tw/en/), but no driver was provided.
 
 We reverse-engineered the documentation and source-code for the "driverless" LED-application, to create a driver
