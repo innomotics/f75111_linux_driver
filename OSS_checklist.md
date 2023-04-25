@@ -32,14 +32,14 @@ github.com/innomotics/f75111_linux_driver
 ## Approval
 
 * [ ] Your organization [agrees on making this component *Open Source*](https://wiki.siemens.com/x/E6n-Bg) and an approval email is attached to this Merge Request. (This includes a mandatory check for IPR issues.)
-* [ ] The funding and staffing of the project is clarified for more than the current fiscal year. Some topics to consider:
-    * Community interaction: reasonable response time assured (for issues, merge requests etc.)
-    * Dependency management: consumed third-party libraries are kept up-to-date, especially with respect to security patches
+* [x] The funding and staffing of the project is clarified for more than the current fiscal year. Some topics to consider:
+    * Community interaction: reasonable response time assured (for issues, merge requests etc.): _@mathias.haimerl_ and _@nikita.votintsev_ are the responsible code owners.
+    * Dependency management: consumed third-party libraries are kept up-to-date, especially with respect to security patches: The sole dependency is the _i2c_i801_ standard module, which is updated with the base system.
 
 ## Maintainer readiness
 
 * [x] Maintainers are familiar with Git and have experience contributing to or maintaining Open or Inner Source Software. Experience should be visible on GitHub and/or code.siemens.com profiles or explicitly listed in this Merge Request.
-* [ ] Maintainers are listed in a [`CODEOWNERS` file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).
+* [x] Maintainers are listed in a [`CODEOWNERS` file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).
 * [x] You have considered applying as a [Social Coding Ambassador](https://code.siemens.io/docs/_ambassadors)
 * [x] You know the Linux Foundation's [Core Infrastructure best practices](https://bestpractices.coreinfrastructure.org), see e.g. [Embedded Multicore Building Blocks](https://bestpractices.coreinfrastructure.org/projects/654) and plan to apply them.
 * [x] You joined [@Open Source and Open Standards](https://www.yammer.com/siemenscrosscollaboration/#/threads/inGroup?type=in_group&feedId=2884550656) on Yammer.
@@ -52,7 +52,7 @@ github.com/innomotics/f75111_linux_driver
   * (v) _Integrated gitleaks with custom config in pipeline for continuous monitoring_
 * [x] The Git history of the repository is clean, e.g. no orphaned branches, committed binaries or temporary commits.
 * You have verified that your code **does not contain** any of the following information:
-    * [ ] Siemens department identifiers (org codes)
+    * [x] Siemens department identifiers (org codes)
     * [x] Names of Siemens products or projects, or the corresponding release numbers and their release dates
     * [x] Configuration information for real IT environments, such as server names, IP addresses, login information, passwords or private keys.
     * [x] Names of Siemens employees other than the authors
@@ -86,8 +86,8 @@ Open Source contributions](https://code.siemens.com/siemens/code/blob/main/docs/
 and guidance.
 
 * [x] You have chosen a standard [Open Source license](https://opensource.org/licenses) in coordination with the budget owner, according to the projects goals and context.
-* [ ] You have checked that there are no license incompatibilities in your code.
-* [ ] Any third-party components that are published along with the project have gone through a clearing process.
+* [x] You have checked that there are no license incompatibilities in your code.
+* [x] Any third-party components that are published along with the project have gone through a clearing process.
 * [x] You provide the full text of the license in the root directory of your project, e.g. in a file named `LICENSE`.
 * [x] You provide the copyright information in the root directory of your project, e.g. in a file named `COPYING` or in the `README`.
 * [x] Source files contain correct and complete information regarding licensing (using the [SPDX](https://spdx.org/) license identifiers) and copyright.
@@ -97,7 +97,7 @@ Example of copyright and license notice:
 
   ```txt
   Copyright YEAR Innomotics GmbH
-  SPDX-License-Identifier: Apache-2.0
+  SPDX-License-Identifier: GPL-2.0
   ```
 
 > The [reuse developers tools](https://github.com/fsfe/reuse-tool) can help you automatically create and maintain compliant license and copyright information into your Open Source project.

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0
 /*
  * Innomotics LED driver for IPCs using F75111
  *
@@ -62,12 +63,12 @@ u8 smbus_read(u8 cmd) {
  */
 bool verify_f75111() {
     return (
-            ((WORD)smbus_read(F75111_VENDOR_ID_REGISTER_2)) << 8 |
+            ((u16)smbus_read(F75111_VENDOR_ID_REGISTER_2)) << 8 |
             smbus_read(F75111_VENDOR_ID_REGISTER_1)
         ) == F75111_VENDOR_ID
         &&
         (
-            ((WORD)smbus_read(F75111_CHIP_ID_REGISTER_2)) << 8 |
+            ((u16)smbus_read(F75111_CHIP_ID_REGISTER_2)) << 8 |
             smbus_read(F75111_CHIP_ID_REGISTER_1)
         ) == F75111_DEVICE_ID;
 }
@@ -95,7 +96,8 @@ void initialize_f75111() {
 void set_led(innomotics_ipc_led *led, bool pin_status)
 {
     u8 byteData;
-    if (!led) return;
+    if (!led)
+        return;
     byteData = smbus_read(led->pin + 1); // Read register is write register + 1
     if (pin_status)
         byteData |= led->value;
@@ -153,7 +155,8 @@ static int f75111n_ipc_leds_probe(struct platform_device *pdev)
         i2c_adap = i2c_get_adapter(i);
         if (!i2c_adap)
             return -ENODEV;
-        if (strstr(i2c_adap->name, SMBUS_ADAPTER_NEEDLE)) break;
+        if (strstr(i2c_adap->name, SMBUS_ADAPTER_NEEDLE))
+            break;
     }
     if (!i2c_adap)
         return -ENODEV;
@@ -173,9 +176,8 @@ static int f75111n_ipc_leds_probe(struct platform_device *pdev)
 		cdev->name = ipcled->name;
 
 		err = devm_led_classdev_register(&pdev->dev, cdev);
-		if (err < 0) {
+		if (err < 0)
 			return err;
-		}
 		ipcled++;
 	}
     initialize_f75111();
@@ -200,7 +202,8 @@ static int __init wrap_led_init(void)
 {
     int ret;
     ret = platform_driver_register(&innomotics_ipc_led_driver);
-    if (ret < 0) return ret;
+    if (ret < 0)
+        return ret;
 
     pdev = platform_device_register_simple(KBUILD_MODNAME, -1, NULL, 0);
     if (IS_ERR(pdev)) {

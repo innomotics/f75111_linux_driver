@@ -1,3 +1,12 @@
+// SPDX-License-Identifier: GPL-2.0
+/*
+ * Innomotics LED driver for IPCs using F75111
+ *
+ * Copyright (c) Innomotics GmbH, 2023
+ *
+ * Authors:
+ *  Mathias Haimerl <mathias.haimerl@siemens.com>
+ */
 #ifndef CIO_LED_FLASH_F75111_INNOMOTICS_H
 #define CIO_LED_FLASH_F75111_INNOMOTICS_H
 
@@ -69,12 +78,12 @@ typedef struct innomotics_ipc_led {
 } innomotics_ipc_led;
 
 struct innomotics_ipc_led innomotics_ipc_leds_f75111[] = {
-        {1, RED,    GPIO2X_OUTPUT_DATA, 0x01, LED_FUNCTION_STATUS "1::red"},
-        {1, ORANGE, GPIO2X_OUTPUT_DATA, 0x02, LED_FUNCTION_STATUS "1::orange"},
-        {1, GREEN,  GPIO2X_OUTPUT_DATA, 0x04, LED_FUNCTION_STATUS "1::green"},
-        {2, RED,    GPIO1X_OUTPUT_DATA, 0x10, LED_FUNCTION_STATUS "2::red"},
-        {2, ORANGE, GPIO1X_OUTPUT_DATA, 0x80, LED_FUNCTION_STATUS "2::orange"},
-        {2, GREEN,  GPIO1X_OUTPUT_DATA, 0x40, LED_FUNCTION_STATUS "2::green"},
+        {1, RED,    GPIO2X_OUTPUT_DATA, 0x01, LED_FUNCTION_STATUS "1:red:error"},
+        {1, ORANGE, GPIO2X_OUTPUT_DATA, 0x02, LED_FUNCTION_STATUS "1:orange:warning"},
+        {1, GREEN,  GPIO2X_OUTPUT_DATA, 0x04, LED_FUNCTION_STATUS "1:green:info"},
+        {2, RED,    GPIO1X_OUTPUT_DATA, 0x10, LED_FUNCTION_STATUS "2:red:error"},
+        {2, ORANGE, GPIO1X_OUTPUT_DATA, 0x80, LED_FUNCTION_STATUS "2:orange:warning"},
+        {2, GREEN,  GPIO1X_OUTPUT_DATA, 0x40, LED_FUNCTION_STATUS "2:green:info"},
         {0, 0, 0, 0, ""},
 };
 const char* colors[] = {"", "RED", "ORANGE", "GREEN"};
