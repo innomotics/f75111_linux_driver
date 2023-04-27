@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install base software
-        run: sudo apt update && apt install -y nodejs npm build-essential ruby-dev cmake pkg-config libssl-dev libicu-dev libz-dev
+        run: sudo apt update && sudo apt install -y nodejs npm build-essential ruby-dev cmake pkg-config libssl-dev libicu-dev libz-dev
       - name: Install Ruby Gems
         run: sudo gem install github-linguist licensee
       - name: Install npm software
@@ -44,7 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install base software
-        run: sudo apt update && apt install -y build-essential linux-headers-$(uname -r)
+        run: sudo apt update && sudo apt install -y build-essential linux-headers-$(uname -r)
       - run: |
           mkdir -p temp && echo -e "${MOK_PEM_PRIVATE}" > temp/.priv && echo -e "${MOK_PEM_CERT}" > temp/.x509
           make sign; rm -rf temp # In any case: delete the keys
