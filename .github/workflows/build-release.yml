@@ -44,7 +44,7 @@ jobs:
       - name: Execute Repolinter
         run: repolinter lint .
 
-  build and sign module:
+  build-and-sign-module:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -53,5 +53,7 @@ jobs:
       - run: mkdir -p temp && echo -e "${MOK_PEM_PRIVATE}" > temp/.priv && echo -e "${MOK_PEM_CERT}" > temp/.x509
       - run: make sign; rm -rf temp # In any case: delete the keys
       - run: modinfo *.ko.zst
+      - name: Upload math result for job 2
+        uses: actions/upload-artifact@v3
         with:
-          fileOutput: '*.ko.zst'
+          path: '*.ko.zst'
