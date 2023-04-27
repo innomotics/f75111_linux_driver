@@ -1,4 +1,5 @@
 variables:
+  MODULE_NAME: f75111_gpio
   https_proxy: ${CODE_PROXY}
   http_proxy: ${CODE_PROXY}
   no_proxy: api.siemens.com,cr.siemens.com,code.siemens.com,devops.bt.siemens.com
@@ -8,6 +9,7 @@ stages:
   - prepare
   - test
   - build
+  - release
 
 prepare build container:
   stage: prepare
@@ -48,16 +50,29 @@ repolinter check:
     - gem install licensee
     - repolinter lint .
 
-build in container:
+build RPM in container:
   stage: build
   image: ${BUILD_CONTAINER}
-  script:
-    - source /root/.bashrc
-    - mkdir -p temp
-    - echo -e "${MOK_PEM_PRIVATE}" > temp/.priv && echo -e "${MOK_PEM_CERT}" > temp/.x509
-    - make sign; rm -rf temp # In any case: delete the keys
-    - echo "Created signed and compressed kernel module:"
-    - modinfo *.ko.zst
+  script: |
+    set -x
+    source /root/.bashrc
+    echo -e "${MOK_PEM_PRIVATE}" > ~/rpmbuild/BUILD/temp/.priv && echo -e "${MOK_PEM_CERT}" > ~/rpmbuild/BUILD/temp/.x509
+    echo "Created signed and compressed kernel module:"
+    modinfo *.ko.zst
   artifacts:
     paths:
       - "*.ko.zst"
+
+release kernel container:
+  stage: release
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile.release"
+      --destination ${CI_REGISTRY_IMAGE}/f75111_gpio:latest
+      --build-arg http_proxy=${CODE_PROXY}
+      --build-arg https_proxy=${CODE_PROXY}

@@ -1,0 +1,3 @@
+FROM scratch
+ADD f75111_gpio.ko.zst .
+ADD innomotics.conf .

@@ -46,10 +46,9 @@ jobs:
       - name: Install base software
         run: sudo apt update && sudo apt install -y build-essential linux-headers-$(uname -r)
       - run: |
-          mkdir -p temp && echo -e "${MOK_PEM_PRIVATE}" > temp/.priv && echo -e "${MOK_PEM_CERT}" > temp/.x509
-          make sign; rm -rf temp # In any case: delete the keys
-          modinfo *.ko.zst
-      - name: Upload math result for job 2
+          make modules
+          zstd f57111_gipo.ko
+      - name: Upload compressed kernel module
         uses: actions/upload-artifact@v3
         with:
           path: '*.ko.zst'
