@@ -1,0 +1,57 @@
+name: 'Link Checker: All English'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+# This allows a subsequently queued workflow run to interrupt previous runs
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  scan:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  repolinter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.13.x
+          cache: npm
+      - name: Install base software
+        run: apt update && apt install -y build-essential ruby-dev cmake pkg-config libssl-dev libicu-dev libz-dev
+      - name: Install Ruby Gems
+        run: gem install github-linguist licensee
+      - name: Install npm software
+        run: npm install -g repolinter
+      - name: Execute Repolinter
+        run: repolinter lint .
+
+  build and sign module:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install base software
+        run: apt update && apt install -y build-essential linux-headers-$(uname -r)
+      - run: mkdir -p temp && echo -e "${MOK_PEM_PRIVATE}" > temp/.priv && echo -e "${MOK_PEM_CERT}" > temp/.x509
+      - run: make sign; rm -rf temp # In any case: delete the keys
+      - run: modinfo *.ko.zst
+        with:
+          fileOutput: '*.ko.zst'

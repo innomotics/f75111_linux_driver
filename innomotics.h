@@ -1,3 +1,12 @@
+// SPDX-License-Identifier: GPL-2.0
+/*
+ * Innomotics LED driver for IPCs using F75111
+ *
+ * Copyright (c) Innomotics GmbH, 2023
+ *
+ * Authors:
+ *  Mathias Haimerl <mathias.haimerl@siemens.com>
+ */
 #ifndef CIO_LED_FLASH_F75111_INNOMOTICS_H
 #define CIO_LED_FLASH_F75111_INNOMOTICS_H
 
@@ -47,23 +56,10 @@
 //--------------------------------------------------------------------------------------------------------
 #define I2C_MAX_SCAN_ADAPTERS       16
 
-typedef unsigned char BYTE;
-typedef unsigned short WORD;
-typedef unsigned long DWORD;
-
-
 const struct i2c_board_info i2c_info = {
     // The internal address in Linux I2C is not 8 Bit, but 7 bit.
     // Thus, the 8-Bit Address must be shifted left by 1 bit
     I2C_BOARD_INFO("f75111", F75111_INTERNAL_ADDR >> 1),
-};
-
-struct innomotics_ipc_platform {
-    u8	            devmode;			/* device mode */
-    u16		        sio_addr;			/* sio io port address */
-    void	        *nvram_dev;			/* nvram pci device address */
-    u32		        nvram_did;			/* nvram pci device id */
-    struct resource *gpio_base;			/* gpio base address for 2x7d and 4x7d */
 };
 
 enum led_color {
@@ -82,12 +78,12 @@ typedef struct innomotics_ipc_led {
 } innomotics_ipc_led;
 
 struct innomotics_ipc_led innomotics_ipc_leds_f75111[] = {
-        {1, RED,    GPIO2X_OUTPUT_DATA, 0x01, LED_FUNCTION_STATUS "1::red"},
-        {1, ORANGE, GPIO2X_OUTPUT_DATA, 0x02, LED_FUNCTION_STATUS "1::orange"},
-        {1, GREEN,  GPIO2X_OUTPUT_DATA, 0x04, LED_FUNCTION_STATUS "1::green"},
-        {2, RED,    GPIO1X_OUTPUT_DATA, 0x10, LED_FUNCTION_STATUS "2::red"},
-        {2, ORANGE, GPIO1X_OUTPUT_DATA, 0x80, LED_FUNCTION_STATUS "2::orange"},
-        {2, GREEN,  GPIO1X_OUTPUT_DATA, 0x40, LED_FUNCTION_STATUS "2::green"},
+        {1, RED,    GPIO2X_OUTPUT_DATA, 0x01, LED_FUNCTION_STATUS "1:red:error"},
+        {1, ORANGE, GPIO2X_OUTPUT_DATA, 0x02, LED_FUNCTION_STATUS "1:orange:warning"},
+        {1, GREEN,  GPIO2X_OUTPUT_DATA, 0x04, LED_FUNCTION_STATUS "1:green:info"},
+        {2, RED,    GPIO1X_OUTPUT_DATA, 0x10, LED_FUNCTION_STATUS "2:red:error"},
+        {2, ORANGE, GPIO1X_OUTPUT_DATA, 0x80, LED_FUNCTION_STATUS "2:orange:warning"},
+        {2, GREEN,  GPIO1X_OUTPUT_DATA, 0x40, LED_FUNCTION_STATUS "2:green:info"},
         {0, 0, 0, 0, ""},
 };
 const char* colors[] = {"", "RED", "ORANGE", "GREEN"};
