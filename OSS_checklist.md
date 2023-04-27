@@ -31,7 +31,7 @@ github.com/innomotics/f75111_linux_driver
 
 ## Approval
 
-* [ ] Your organization [agrees on making this component *Open Source*](https://wiki.siemens.com/x/E6n-Bg) and an approval email is attached to this Merge Request. (This includes a mandatory check for IPR issues.)
+* [x] Your organization [agrees on making this component *Open Source*](https://wiki.siemens.com/x/E6n-Bg) and an approval email is attached to this Merge Request. (This includes a mandatory check for IPR issues.)
 * [x] The funding and staffing of the project is clarified for more than the current fiscal year. Some topics to consider:
     * Community interaction: reasonable response time assured (for issues, merge requests etc.): _@mathias.haimerl_ and _@nikita.votintsev_ are the responsible code owners.
     * Dependency management: consumed third-party libraries are kept up-to-date, especially with respect to security patches: The sole dependency is the _i2c_i801_ standard module, which is updated with the base system.
@@ -65,7 +65,7 @@ github.com/innomotics/f75111_linux_driver
 
 * [x] You do not work directly on the main branch; it is protected
 * [x] You use the [merge request workflow](https://code.siemens.com/help/user/project/merge_requests/index.md) and [Conventional Changelog](https://wiki.siemens.com/display/en/Conventional+Changelog)
-* [ ] `CHANGELOG.md` available and auto generated
+* [x] `CHANGELOG.md` available and auto generated
 * [x] You use CI/CD, e.g. using GitHub actions
 
 ## Documentation
