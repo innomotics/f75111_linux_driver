@@ -26,8 +26,7 @@ of the _F75111_ address and accessing values over high-level APIs while accessin
 instead of the high-level SMBus functions.
 
 ## Creation of the Kernel Module
-We started with a very basic kernel module like the [SIMATIC IPC kernel modules](https://code.siemens.com/simatic-ipc/sw/simatic-ipc-modules-lsp)
-have been implemented and the [Linux Kernel Modules Documentation](https://docs.kernel.org/i2c/index.html).
+We started with a very basic kernel module following the [Linux Kernel Modules Documentation](https://docs.kernel.org/i2c/index.html).
 
 The basic kernel functionality is as follows:
 
