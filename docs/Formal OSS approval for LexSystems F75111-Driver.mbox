@@ -1,0 +1,287 @@
+From krueger.sebastian@siemens.com Wed Apr 26 14:18:34 2023
+Received: from AS4PR10MB6062.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:581::7) by VI1PR10MB3663.EURPRD10.PROD.OUTLOOK.COM with
+ HTTPS; Wed, 26 Apr 2023 14:18:34 +0000
+Received: from AS1PR10MB5391.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:48e::20) by AS4PR10MB6062.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:581::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6340.21; Wed, 26 Apr
+ 2023 14:18:34 +0000
+Received: from AS1PR10MB5391.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::a21e:a508:240d:3255]) by AS1PR10MB5391.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::a21e:a508:240d:3255%6]) with mapi id 15.20.6340.019; Wed, 26 Apr
+ 2023 14:18:34 +0000
+From: "Krueger, Sebastian (SMD MVD PLM-SW REC ECS)"
+	<krueger.sebastian@siemens.com>
+To: "Haimerl, Mathias (SMD MVD PLM-SW REC ECS)"
+ <mathias.haimerl@siemens.com>
+CC: "Votintsev, Nikita (SMD MVD PLM-SW REC ECS)"
+	<nikita.votintsev@siemens.com>
+Subject: Re: Formal OSS approval for LexSystems F75111-Driver
+Thread-Topic: Formal OSS approval for LexSystems F75111-Driver
+Thread-Index: AQHZd0IZrZV0v6XtLkCYNnYA6QLV8K89oHpN
+Message-ID:
+	<AS1PR10MB53915C5B7268498660213BE1FC659@AS1PR10MB5391.EURPRD10.PROD.OUTLOOK.COM>
+References: <013a70ef08ed1eda56d06709fc08b53ccf4a5338.camel@siemens.com>
+In-Reply-To: <013a70ef08ed1eda56d06709fc08b53ccf4a5338.camel@siemens.com>
+Accept-Language: de-DE, en-US
+Content-Language: en-GB
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource:
+ AS1PR10MB5391.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Has-Attach: yes
+X-MS-Exchange-Organization-Network-Message-Id:
+	6ea17f98-0385-472f-e92a-08db46611e7d
+X-MS-Exchange-Organization-SCL: -1
+X-MS-TNEF-Correlator: 
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+msip_labels:
+ MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Enabled=True;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SiteId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SetDate=2023-04-26T14:00:45.5746688Z;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ContentBits=0;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Method=Standard
+x-ms-publictraffictype: Email
+X-Microsoft-Antispam-Mailbox-Delivery:
+ ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(944506478)(944626604)(920097)(425001)(930097);
+X-Microsoft-Antispam-Message-Info:
+ F6GBlMBr5JoXFfB7hi+O3LFZSX0hMZaoYgXoi7pfXctPHn3hxbZdYylF7T4C/JS96mIIxiqO3+AVZ+V5qyn61jLmgU8I7fCJYZeMgQXI9j0LzcE0hEtnAzKqzqIYLSex7d3IZlzdLClK1bjKM7nBrVMrS0aWCgezjoVmUu7NIKclaflmoS3jdUSbqljxeJab2KR5uDbc8ju6ESe9vvSjyuQEwyB626h0Rb0Hxm9PH7UeefQeJRM1NU2dA8J3lV2sjf5jEnFUtSg6Ey970YVGgFE/ZqLbporIk22n4pI2aqj5DNGthgiGzReQ9bsEgxQHdiQgr3I7Yb/Hdj2k8As4TawVhqP1PbHIQWjSF9uwvWEANPWD26k7g2rp5pE1XLnj669haRz21fMF2hDzzm6uP0zpxEbR3JIeZ1M4+kZaD02H+sAsXT/kvy61jU2sVHD9M+4yjxjwJMufna1KMZdei7yN/0NLf6iQMhB3n9Of1AL2M0rhww5zYp7Kt6gAqDfxFnO0FBABFUpRjH6thRYInRknn82UjcUPz9B4CJ6knZjaItHshBzMxuLKhZeeB5mTSuikVnmzg1KgRUURRqq1Qbi4P6hRtfTXo+6YbRrfUt2AaoWTgwXNsObSY/OmdIHgrhOpgNMeuoMMCZgrTrAugLOqVnK4UejBwhqoIxjy2WeO8hXriVCQZlLJcBnBrDkQFO96rUjxeAaoWMgKerCD7/pqlXraaesQCo80EsZHxkE=
+Content-Type: multipart/related;
+	boundary="_004_AS1PR10MB53915C5B7268498660213BE1FC659AS1PR10MB5391EURP_";
+	type="multipart/alternative"
+MIME-Version: 1.0
+Date: Wed, 26 Apr 2023 14:18:33 +0000
+X-Evolution-Source: 0-ews-siemens-002
+
+--_004_AS1PR10MB53915C5B7268498660213BE1FC659AS1PR10MB5391EURP_
+Content-Type: multipart/alternative;
+	boundary="_000_AS1PR10MB53915C5B7268498660213BE1FC659AS1PR10MB5391EURP_"
+
+--_000_AS1PR10MB53915C5B7268498660213BE1FC659AS1PR10MB5391EURP_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: 8bit
+
+Hello Mathias,
+
+as discussed with you, from my point of view and that of the organization it is ok to release this software project as open source.
+
+
+Mit freundlichen Grüßen
+Sebastian Krüger
+
+Siemens AG
+Head of Edge Computing Solutions
+LDA D PLM-SW REC ECS
+Vogelweiherstr. 1-15
+90441 Nürnberg, Deutschland
+Mobil: +49 (162) 9701397
+mailto:krueger.sebastian@siemens.com
+www.siemens.com<about:blankwww.siemens.com>
+[Logo]
+Siemens Aktiengesellschaft: Vorsitzender des Aufsichtsrats: Jim Hagemann Snabe; Vorstand: Roland Busch, Vorsitzender; Cedrik Neike, Matthias Rebellius, Ralf P. Thomas, Judith Wiese; Sitz der Gesellschaft: Berlin und München, Deutschland; Registergericht: Berlin-Charlottenburg, HRB 12300, München, HRB 6684; WEEE-Reg.-Nr. DE 23691322
+
+
+From: Haimerl, Mathias (SMD MVD PLM-SW REC ECS) <mathias.haimerl@siemens.com>
+Date: Tuesday, 25. April 2023 at 08:49
+To: Krueger, Sebastian (SMD MVD PLM-SW REC ECS) <krueger.sebastian@siemens.com>
+Cc: Votintsev, Nikita (SMD MVD PLM-SW REC ECS) <nikita.votintsev@siemens.com>
+Subject: Formal OSS approval for LexSystems F75111-Driver
+Hi Sebastian,
+
+according to the requirements of the OSS checklist, the organisation
+must commit to realeas the project as open source. The response must be
+attached to the OSS merge request.
+
+With the sole purpose of providing a driver for the module, no IP has
+been implemented. As Kernel Modules must be GPL-compatible, I would
+release the  kernel module as GPLv3
+(https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.gnu.org%2Flicenses%2Fgpl-3.0&data=05%7C01%7Ckrueger.sebastian%40siemens.com%7C3239938041f24e2560bf08db45593c56%7C38ae3bcd95794fd4addab42e1495d55a%7C1%7C0%7C638180021778007624%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=58anCkAZdTyToIQqiD%2F01wSYdJScv%2Ft8qmoygNaXCDs%3D&reserved=0<https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.gnu.org%2Flicenses%2Fgpl-3.0&data=05%7C01%7Cmathias.haimerl%40siemens.com%7C6ea17f980385472fe92a08db46611e7d%7C38ae3bcd95794fd4addab42e1495d55a%7C1%7C0%7C638181155149414375%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=vRQ%2FhOm%2BqXHWdTL9Vye5KAz0QyL8w042fEyGYXvoWVk%3D&reserved=0>), which denies all warranty and
+enforces derived (forked) projects to also use GPLv3.
+
+As there is no intent fomr Siemens/Innomotics side to sell this driver,
+I suggest to confirm this request and have it released as open source
+software.
+
+Mathias Haimerl
+--
+Siemens AG
+Large Drives Applications
+SMD MVD PLM-SW REC ECS
+Vogelweiherstr. 1-15
+90441 Nürnberg, Deutschland
+Mobil: +49 1523 466 34 76
+mailto:mathias.haimerl@siemens.com
+www.siemens.com<http://www.siemens.com>
+
+--_000_AS1PR10MB53915C5B7268498660213BE1FC659AS1PR10MB5391EURP_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: 8bit
+
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="Generator" content="Microsoft Word 15 (filtered medium)">
+<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style><![endif]--><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	font-size:10.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+span.EmailStyle19
+	{mso-style-type:personal-reply;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;
+	mso-ligatures:none;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style>
+</head>
+<body lang="en-DE" link="blue" vlink="purple" style="word-wrap:break-word">
+<div class="WordSection1">
+<p class="MsoNormal"><span lang="DE" style="font-size:11.0pt;mso-fareast-language:EN-US">Hello Mathias,<o:p></o:p></span></p>
+<p class="MsoNormal"><span lang="DE" style="font-size:11.0pt;mso-fareast-language:EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal"><span lang="EN-US" style="font-size:11.0pt;mso-fareast-language:EN-US">as discussed with you, from my point of view and that of the organization it is ok to release this software project as open source.<o:p></o:p></span></p>
+<p class="MsoNormal"><span lang="EN-US" style="font-size:11.0pt;mso-fareast-language:EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal"><span style="font-size:11.0pt"><o:p>&nbsp;</o:p></span></p>
+<div>
+<div>
+<p class="MsoNormal"><span style="font-family:&quot;Arial&quot;,sans-serif;color:black">Mit freundlichen Grüßen<br>
+Sebastian Krüger<br>
+<br>
+Siemens AG<br>
+</span><span lang="DE" style="font-family:&quot;Arial&quot;,sans-serif;color:black">Head of
+</span><span style="font-family:&quot;Arial&quot;,sans-serif;color:black">Edge Computing Solutions<br>
+LDA </span><span lang="DE" style="font-family:&quot;Arial&quot;,sans-serif;color:black">D PLM-SW REC ECS</span><span style="font-family:&quot;Arial&quot;,sans-serif;color:black"><br>
+Vogelweiherstr. 1-15<br>
+90441 Nürnberg, Deutschland<br>
+Mobil: +49 (162) 9701397<br>
+<a href="mailto:krueger.sebastian@siemens.com" title="mailto:krueger.sebastian@siemens.com"><span style="color:#0F93FF">mailto:krueger.sebastian@siemens.com</span></a><br>
+<a href="about:blankwww.siemens.com" target="_blank" title="www.siemens.com"><span style="color:#000068">www.siemens.com</span></a><br>
+<img border="0" width="202" height="80" style="width:2.1041in;height:.8333in" id="Picture_x0020_1" src="cid:image001.gif@01D9785A.B4DA5EA0" alt="Logo"><br>
+</span><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,sans-serif;color:black">Siemens Aktiengesellschaft: Vorsitzender des Aufsichtsrats: Jim Hagemann Snabe; Vorstand: Roland Busch, Vorsitzender; Cedrik Neike, Matthias Rebellius, Ralf P. Thomas, Judith Wiese;
+ Sitz der Gesellschaft: Berlin und München, Deutschland; Registergericht: Berlin-Charlottenburg, HRB 12300, München, HRB 6684; WEEE-Reg.-Nr. DE 23691322</span><span style="font-size:11.0pt;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size:11.0pt;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+</div>
+<p class="MsoNormal"><span style="font-size:11.0pt;mso-fareast-language:EN-US"><o:p>&nbsp;</o:p></span></p>
+<div style="border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0cm 0cm 0cm">
+<p class="MsoNormal" style="margin-bottom:12.0pt"><b><span style="font-size:12.0pt;color:black">From:
+</span></b><span style="font-size:12.0pt;color:black">Haimerl, Mathias (SMD MVD PLM-SW REC ECS) &lt;mathias.haimerl@siemens.com&gt;<br>
+<b>Date: </b>Tuesday, 25. April 2023 at 08:49<br>
+<b>To: </b>Krueger, Sebastian (SMD MVD PLM-SW REC ECS) &lt;krueger.sebastian@siemens.com&gt;<br>
+<b>Cc: </b>Votintsev, Nikita (SMD MVD PLM-SW REC ECS) &lt;nikita.votintsev@siemens.com&gt;<br>
+<b>Subject: </b>Formal OSS approval for LexSystems F75111-Driver<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal" style="margin-bottom:12.0pt"><span style="font-size:11.0pt">Hi Sebastian,<br>
+<br>
+according to the requirements of the OSS checklist, the organisation<br>
+must commit to realeas the project as open source. The response must be<br>
+attached to the OSS merge request.<br>
+<br>
+With the sole purpose of providing a driver for the module, no IP has<br>
+been implemented. As Kernel Modules must be GPL-compatible, I would<br>
+release the&nbsp; kernel module as GPLv3<br>
+(<a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.gnu.org%2Flicenses%2Fgpl-3.0&amp;data=05%7C01%7Cmathias.haimerl%40siemens.com%7C6ea17f980385472fe92a08db46611e7d%7C38ae3bcd95794fd4addab42e1495d55a%7C1%7C0%7C638181155149414375%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=vRQ%2FhOm%2BqXHWdTL9Vye5KAz0QyL8w042fEyGYXvoWVk%3D&amp;reserved=0" originalsrc="https://www.gnu.org/licenses/gpl-3.0" shash="jH9fLKq5qBSUshswjUV4jVOt0/E9xDJvMJs//SwpdqAXVTWejqxRjxoc+7ioeHgh6U+x0c7IL3BpxhZ0MWWzhjNcpW8orVNnHo3oEJzqlyAxwJpOJsmLO/eT8i2tTdE6Ji/YvB/2di2CX6oRSA2jAQ9bz9e7839w5UTjBoDG1Ek=">https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.gnu.org%2Flicenses%2Fgpl-3.0&amp;data=05%7C01%7Ckrueger.sebastian%40siemens.com%7C3239938041f24e2560bf08db45593c56%7C38ae3bcd95794fd4addab42e1495d55a%7C1%7C0%7C638180021778007624%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=58anCkAZdTyToIQqiD%2F01wSYdJScv%2Ft8qmoygNaXCDs%3D&amp;reserved=0</a>),
+ which denies all warranty and<br>
+enforces derived (forked) projects to also use GPLv3.<br>
+<br>
+As there is no intent fomr Siemens/Innomotics side to sell this driver,<br>
+I suggest to confirm this request and have it released as open source<br>
+software.<br>
+<br>
+Mathias Haimerl<br>
+-- <br>
+Siemens AG<br>
+Large Drives Applications<br>
+SMD MVD PLM-SW REC ECS<br>
+Vogelweiherstr. 1-15<br>
+90441 Nürnberg, Deutschland<br>
+Mobil: +49 1523 466 34 76<br>
+<a href="mailto:mathias.haimerl@siemens.com">mailto:mathias.haimerl@siemens.com</a><br>
+<a href="http://www.siemens.com">www.siemens.com</a><o:p></o:p></span></p>
+</div>
+</div>
+</body>
+</html>
+
+--_000_AS1PR10MB53915C5B7268498660213BE1FC659AS1PR10MB5391EURP_--
+
+--_004_AS1PR10MB53915C5B7268498660213BE1FC659AS1PR10MB5391EURP_
+Content-Type: image/gif; name="image001.gif"
+Content-Description: image001.gif
+Content-Disposition: inline; filename="image001.gif"; size=2980;
+	creation-date="Wed, 26 Apr 2023 14:18:16 GMT";
+	modification-date="Wed, 26 Apr 2023 14:18:34 GMT"
+Content-ID: <image001.gif@01D9785A.B4DA5EA0>
+Content-Transfer-Encoding: base64
+
+R0lGODlhygBQAPcAAAAAAP///wCZmQCamgCYmACXlwCUlACTkwCRkQCOjgCNjQCLiwKamgKZmQKT
+kwOXlwSZmQSVlQWamgWXlwabmwaXlweZmQiYmAmbmwmXlwqdnQqamgqWlguZmQ2eng2amg6cnA2X
+lw6amhCfnxGcnBGbmxKcnBOenhKWlhSfnxWdnRafnxeiohehoRednRihoRmfnxqiohugoBygoBub
+mx2jox6kpB6ioiCkpB+hoSCjoyChoSKlpSKioiWnpySkpCenpyelpSqrqymoqCmnpyikpCqoqCun
+pyqlpSqjoyyqqiypqS6pqS+qqi6npzCrqzKrqzGoqDOsrDStrTWurjatrTWrqzeurjeqqjmtrTuw
+sDqsrD2xsT+ysj2trT+xsT6urj+vr0Kzs0GxsUCurkCtrUO0tEKxsUOyska0tEe1tUezs0m2tkex
+sUm1tUiysku2tky3t0y1tU+4uE63t020tE2zs1C4uE+1tVG3t1K4uFW7u1W5uVe6ule5uVq8vFu7
+u129vV27u1+9vWC+vmG/v2C9vWK/v2TBwWPAwGfDw2bAwGnCwmvDw2nAwGrAwG3ExGzCwm/FxXPH
+x3HDw3XGxn3Ly3rGxn3JyYDMzH/Ly4HLy4XOzofPz4XMzIfNzYnPz4jNzYrPz43S0ovQ0IzQ0I7R
+0ZHS0pHR0ZTU1JPT05LR0ZfW1pXT05fV1ZjV1ZnW1prW1prU1J3Y2J3X15/Y2J7X153V1aLa2qHY
+2KXb26PZ2afb26nc3Kve3qnb263f36vd3azd3a/f37Lh4bHg4LDf37Xh4bfi4rbg4Lvk5L3m5rvj
+473l5b/m5r7l5cHn58Ln58bp6cTn58nq6sbn58rq6sjo6Mzr687s7NHt7dPt7dXu7tnw8Nrw8Nnv
+793y8tzx8d/z8+H09OL09OHz8+T19eLz8+f29un39+f19ev4+Or39+75+fH6+u/4+PH5+fX8/PP6
++vX7+/f8/Pb7+/n9/fv+/vr9/fz+/v7//////wAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEA
+AAAh+QQFAAD7ACwAAAAAygBQAAAI/wADCBxIsKDBgwgTKlzIsKHDhxAjSpxIsaLFixgzatzIsaPH
+jyBDihxJsqTJkyhTqlzJsqXLlzBjypxJs6bNmzhz6tzJs6fPn0CDCh1KtKjRo0iTKl3KtKnTp1Cj
+Sp1KtarVq1izat3KtavXr2DDih1LtqzZs2gh5ku37Zo2cvX0GcxHt27Bunjz0pUrMN+9vAv16b37
+V29evgEEA55rF6G7btaseWuXbym2UGhaUIBAYcQQOpe0EZwEBg0aL47aDUwnqLTp17DRlME1sNQW
+2GEI2UPYrc6X12H8mBt4D5OX2MjBWBqIjMyZ115q3V0U5ksd0QTR2QLEQwMECRpsfP95FAypKBMI
+DhQgwL5AgQMKQBHkksCAgQRO0A0Ul6O+/f8A3qfJQIQoAOABByCDkCUG/oeACt0MZI8dDQYIYAJs
+DMRKAgf8l8AQ9BB0DxEIIMDBMwQpEwWC67FHQAEGKEDFUad0OIAABnQIo30ImEKQGgYIIMABVqQz
+EDlBBCnAADsGmEAmAyFygJBUGqDHQflMYcCNQhpwQzgS5jHlkgRYeB8cA81iAAFU4piKiFAYUEAJ
+0QyEzQkILPnefx0i0IVR2qgQ5ItMaNJLMKxAUgUKpfyoJJFGCoSkkgS0sIQRmGaaxCtRjkllASZQ
+Y9AzD7SJ45dhjkmAB5dmimkSkKT/uWabBuCgDnFxzllnAPjAkacABazAyC7C5GKJGzT8WVQnB7Bp
+ABD6EUTPNN84KiSkRyZ5rSbyvOPtt++EKJCUpg65XEF6eNolqgLZI2aXcXQLrrfzyMomlQQcgAmu
+ctIpEDYqFADsB8MYxM00RiHyqwFUVLYQkNcWme2jnTBELrBUHnBGvXaSIPC9p4LZ7rtDXrmQmmyC
+fMARkd6Tq78B+DKBwAWoYI1TiqhKAB7VPPyoxJJqOyQnFjfLgBD3FvAAigNZggB7PkiwrsgBuDvm
+AXcwhLIAFAh8bcUBuNzvrsNU4HUBRNjiDlM1qrzBIcSIaxDEQwIdwKTXNrqQlC9y/+KD1wcEMpA8
+Y6jXAiMXTJ3qtXtovaYBd1yhZAEtgBP2y7tyA4OSOGoMSzlKmaODp0wicEEWvSA2EN3YBj35FIkU
+Irvsf0hDELkHAPPJmAVgUG0AyERAAAKE6FJqyIsDa0PssxcCiC4EoXxAJcQ0KyQCklw+tkD6JPKr
+kPka0IMm7yQVTAfqAtshHzdbW3ekdwutPoL0K0DL7VMe4Is2D9x7wLnpIkAEiCEMJXmJalb7FP3q
+54jorekAjEjHEcZkAB7cCnMDOQcTEFAALgmgTAhgwi7wgRRkYKFDpspXCWizup/BD29Ces8C4TML
+/A0JF/OowtW4oA9tWKBMVaAHLf8oyK6qkWx+C1TAIxyYr0MEgBUOSJm+AiCF7Q0EHIEwwNNMlaNF
+qOYo7IhFFuzjtSUd4ALKaGHEXii0AiyhD3qIYxzrwLRx5a+GprBeATogjVLkr1GxICICSVaAGPBB
+jnG0wy2YeABCBGAeX5hcCrLBBSsOJB/HAMQF1AOyAiTgXEipRy64kIFZXW8RfGGd3WB4gIrp45Ww
+LAjuaiiOGxjwD1xYjwW4EYBAKm5kV7sSLGPJSEcGoBeeQkAlxGDJgkwjEC5QT8Z+QI6l2OMYfVjP
+taqwDoGoko2PItre7igQSHCuAWbsg1x8iTxgXitrJ3ugMd1hhS0B6wUseBHMEIL/jUyA4GwFaEZT
+6OEGAwZhHN504cSuJU6FzFIgyiijiwrADIGw84DJw5rj8mXMABjDlNrUFUNOQSkDAIMo+FDdaK62
+hfIF4JsLHZKPxjmkGgaAHk3g3JDWwLGLFjGBQ2pcPDlKHD58L4Ywy8duDoKN/n2wANAgCjUM4Qpl
+ZIMc7niHN3pRA68hoBFqfF9MDTCHWMDirGhNhYLsWNOB1AhfBxjFQHw6SAo+waxoPWsqeBEPgUiv
+o8DLQBmBBTN6SMISxaBGON4BD3I4g3VHiJZQlHEABHwABj9QghFuMLNrhUCgCV1jTIFlpgSYoVNt
+FUg5eGDAE2Cnl4JMHmkthIAd/0Trr9JKg7pEetMhJOACKtCBEZbwgxJM7pNFWYYI5OQeMhKgdCS4
+X1hbFz/Ouei6+coQWw9gU4FMYkoDCBxB6CrbD2K3TD+IFG4JEo0ffgpm9piCeppLxmsdwIvJrQCH
+EGQfBHGwDVEliBYUgCAFIEGy4pABgWc4QwWIYSCBWAB8WEGQYZQIAQaw3UBaseAEnMAbEnqDhBm8
+wATMIFobQsAC+mCQQiz4AAmIAGjxIYX98jdHCCqCKo4Cj2KcAhOGkMMYxiCHSJQCGfIwiDFQoQpV
+rOIXfRWIPHaxiiZb+cpNXkUxBtIMJqOClwNpxycoQQlSqI4bVXZyLeBxyWQwGXTLWF7FLjiGZidX
+tCDgeLMqTiGL4QjkGq/wRCTugIYvpGEQm9DFOZqiGJWmZSCKcdijJ03pSlv60pjOtKY3zelOe/rT
+oA61qEdN6lKb+tSoTrWqV83qVrv61bCOtaxnTeta2/rWuM61rnfN6177+tfAtklAAAA7AA==
+
+--_004_AS1PR10MB53915C5B7268498660213BE1FC659AS1PR10MB5391EURP_--
+
