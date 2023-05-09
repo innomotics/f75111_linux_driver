@@ -18,5 +18,5 @@ modules modules_install clean:
 	$(MAKE) -C $(KDIR) M=$(PWD) $@
 
 sign: modules
-	$(KDIR)/scripts/sign-file sha512 ../temp/.priv ../temp/.x509 $(KERNEL_MODULE)
+	$(KDIR)/scripts/sign-file sha512 temp/.priv temp/.x509 $(KERNEL_MODULE)
 	zstd $(KERNEL_MODULE)
