@@ -50,13 +50,14 @@ repolinter check:
     - gem install licensee
     - repolinter lint .
 
-build RPM in container:
+build module   in container:
   stage: build
   image: ${BUILD_CONTAINER}
   script: |
     set -x
     source /root/.bashrc
-    echo -e "${MOK_PEM_PRIVATE}" > ~/rpmbuild/BUILD/temp/.priv && echo -e "${MOK_PEM_CERT}" > ~/rpmbuild/BUILD/temp/.x509
+    echo -e "${MOK_PEM_PRIVATE}" > temp/.priv && echo -e "${MOK_PEM_CERT}" > temp/.x509
+    make sign
     echo "Created signed and compressed kernel module:"
     modinfo *.ko.zst
   artifacts:
