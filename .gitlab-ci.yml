@@ -58,7 +58,7 @@ build module   in container:
     source /root/.bashrc
     mkdir -p temp
     echo -e "${MOK_PEM_PRIVATE}" > temp/.priv && echo -e "${MOK_PEM_CERT}" > temp/.x509
-    make sign
+    make sign; rm -rf temp
     echo "Created signed and compressed kernel module:"
     modinfo *.ko.zst
   artifacts:
