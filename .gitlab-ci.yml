@@ -50,7 +50,7 @@ repolinter check:
     - gem install licensee
     - repolinter lint .
 
-build module   in container:
+build module in container:
   stage: build
   image: ${BUILD_CONTAINER}
   script: |
