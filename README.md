@@ -2,10 +2,11 @@
 
 [![License](https://img.shields.io/badge/License-GPLv2-green.svg)](https://opensource.org/license/gpl-2-0/)
 
-The _SIDRIVEIQ NextGenNano_ (hereinafter NGN) platform developed by [Lex System](https://www.lex.com.tw/en/), but no driver was provided.
+The _SIDRIVEIQ NextGenNano_ (hereinafter NGN) platform developed by [Lex System](https://www.lex.com.tw/en/) provided
+no driver for the _F75111_ (GPIO over SMBUS) chip.
 
-We reverse-engineered the documentation and source-code for the "driverless" LED-application, to create a driver
-provided as a [Linux Kernel Module](https://sysprog21.github.io/lkmpg/#what-is-a-kernel-module).
+We created a driver as a [Linux Kernel Module](https://sysprog21.github.io/lkmpg/#what-is-a-kernel-module), based off
+the documentation and source-code for the "driverless" LED-application provided from _Lex System_.
 
 ## Hardware Considerations and Starting Points
 
